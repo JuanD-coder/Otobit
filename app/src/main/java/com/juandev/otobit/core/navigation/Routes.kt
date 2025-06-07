@@ -1,17 +1,26 @@
 package com.juandev.otobit.core.navigation
 
-object Routes {
-    // Pantallas principales
-    const val HOME = "home"
-    const val ARTISTS = "artists"
-    const val ALL_SONGS = "allSongs"
-    const val PLAYLIST = "playList"
-    const val PLAYER = "player"
-    const val SETTINGS = "settings"
+import kotlinx.serialization.Serializable
 
-    // Pantalla con argumento (trackId)
-    const val NOW_PLAYING = "now_playing/{trackId}"
+interface RouteDestination
 
-    // Función para navegar con trackId dinámico
-    fun nowPlaying(trackId: Long) = "now_playing/$trackId"
-}
+@Serializable
+object Home: RouteDestination
+
+@Serializable
+object Artists: RouteDestination
+
+@Serializable
+object AllSongs: RouteDestination
+
+@Serializable
+object PlayList: RouteDestination
+
+@Serializable
+object Permissions: RouteDestination
+
+@Serializable
+object PlayerNow
+
+@Serializable
+object Settings

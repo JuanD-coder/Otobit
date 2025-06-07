@@ -1,4 +1,4 @@
-package com.juandev.otobit.presentation.allsongs
+package com.juandev.otobit.presentation.screens.allsongs
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

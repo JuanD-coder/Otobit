@@ -9,11 +9,9 @@ import com.juandev.otobit.domain.model.NavItem
 
 object NavItemList {
     val navItemList = listOf(
-        NavItem("Home", Icons.Default.Home, Routes.HOME),
-        NavItem("Songs", Icons.Default.PlayArrow, Routes.ALL_SONGS),
-        NavItem("Artists", Icons.Default.Face, Routes.ARTISTS),
-        NavItem("PlayList", Icons.Default.List, Routes.PLAYLIST)
+        NavItem("Home", Icons.Default.Home, Home),
+        NavItem("Songs", Icons.Default.PlayArrow, AllSongs),
+        NavItem("Artists", Icons.Default.Face, Artists),
+        NavItem("PlayList", Icons.Default.List, PlayList)
     )
 }
-
-//data class NavItem(val label: String, val icon: ImageVector, val route: String)

@@ -1,20 +1,36 @@
 package com.juandev.otobit.core.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.juandev.otobit.presentation.allsongs.AllSongsScreen
-import com.juandev.otobit.presentation.artists.ArtistsScreen
-import com.juandev.otobit.presentation.home.HomeScreen
-import com.juandev.otobit.presentation.playlist.PlaylistsScreen
+import com.juandev.otobit.presentation.screens.allsongs.AllSongsScreen
+import com.juandev.otobit.presentation.screens.artists.ArtistsScreen
+import com.juandev.otobit.presentation.screens.home.HomeScreen
+import com.juandev.otobit.presentation.screens.permissions.PermissionsScreen
+import com.juandev.otobit.presentation.screens.playlist.PlaylistsScreen
 
 @Composable
-fun NavigationWrapper(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Routes.HOME) {
-        composable(Routes.HOME) { HomeScreen() }
-        composable(Routes.ALL_SONGS) { AllSongsScreen() }
-        composable(Routes.ARTISTS) { ArtistsScreen() }
-        composable(Routes.PLAYLIST) { PlaylistsScreen() }
+fun NavigationWrapper(navController: NavHostController, modifier: Modifier) {
+    NavHost(
+        navController = navController,
+        startDestination = Permissions,
+        modifier = modifier
+    ) {
+        composable<Permissions> {
+            PermissionsScreen(
+                onContinue = {
+                    navController.navigate(Home) { // Asume que HomeRoute es tu pantalla principal
+                        popUpTo(Permissions) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
+        composable<Home> { HomeScreen() }
+        composable<AllSongs> { AllSongsScreen() }
+        composable<Artists> { ArtistsScreen() }
+        composable<PlayList> { PlaylistsScreen() }
     }
 }

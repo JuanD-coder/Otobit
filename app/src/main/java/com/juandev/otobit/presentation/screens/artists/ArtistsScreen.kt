@@ -1,4 +1,4 @@
-package com.juandev.otobit.presentation.playlist
+package com.juandev.otobit.presentation.screens.artists
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,13 +9,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PlaylistsScreen() {
+fun ArtistsScreen() {
     Box(Modifier.fillMaxSize().padding(16.dp)) {
-        Playlists()
+        Artists()
     }
 }
 
 @Composable
-fun Playlists() {
-    Text(text = "Play Screen")
+fun Artists() {
+    Text(text = "Artists Screen")
 }

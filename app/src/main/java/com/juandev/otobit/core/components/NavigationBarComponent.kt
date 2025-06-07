@@ -5,18 +5,21 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.juandev.otobit.core.navigation.RouteDestination
 import com.juandev.otobit.domain.model.NavItem
 
 @Composable
-fun NavigationBar(
+fun NavigationBarComponent(
     navItemList: List<NavItem>,
-    currentRoute: String?,
-    onItemSelected: (String) -> Unit
+    currentRoute: RouteDestination?,
+    onItemSelected: (RouteDestination) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    NavigationBar {
+    NavigationBar(modifier = modifier) {
         navItemList.forEach { item ->
             NavigationBarItem(
-                selected = currentRoute == item.route,
+                selected = item.route == currentRoute,
                 onClick = { onItemSelected(item.route) },
                 icon = { Icon(item.icon, contentDescription = item.label) },
                 label = { Text(text = item.label) }
