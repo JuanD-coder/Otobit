@@ -10,13 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.juandev.otobit.core.components.NavigationBarComponent
-import com.juandev.otobit.core.navigation.NavItemList
-import com.juandev.otobit.core.navigation.RouteDestination
 
 @Composable
 fun HomeScreen() {
