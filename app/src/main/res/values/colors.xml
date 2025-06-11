@@ -7,4 +7,22 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Fondo base oscuro estilo Tokyo Night -->
+    <color name="colorBackground">#1A1B26</color>
+    <color name="colorSurface">#24283B</color>
+
+    <!-- Texto primario y secundario -->
+    <color name="colorOnBackground">#F8F8F2</color>
+    <color name="colorOnSurface">#C0CAF5</color>
+
+    <!-- Colores vibrantes del logo Otobit -->
+    <color name="colorAccentBlue">#7AA2F7</color> <!-- Azul neón suave -->
+    <color name="colorAccentPink">#F7768E</color> <!-- Rosa fluorescente -->
+    <color name="colorAccentCyan">#2AC3DE</color> <!-- Cian eléctrico -->
+    <color name="colorAccentPurple">#9D7CD8</color> <!-- Violeta -->
+
+    <!-- Colores adicionales (borde, ripple, etc) -->
+    <color name="colorBorder">#414868</color>
+    <color name="colorHighlight">#BB9AF7</color>
 </resources>

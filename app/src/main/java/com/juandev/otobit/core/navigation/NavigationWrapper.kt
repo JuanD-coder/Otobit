@@ -8,27 +8,29 @@ import androidx.navigation.compose.composable
 import com.juandev.otobit.presentation.screens.allsongs.AllSongsScreen
 import com.juandev.otobit.presentation.screens.artists.ArtistsScreen
 import com.juandev.otobit.presentation.screens.home.HomeScreen
-import com.juandev.otobit.presentation.screens.permissions.PermissionsScreen
 import com.juandev.otobit.presentation.screens.playlist.PlaylistsScreen
+import com.juandev.otobit.presentation.screens.splash.SplashScreen
 
 @Composable
-fun NavigationWrapper(navController: NavHostController, modifier: Modifier) {
+fun NavigationWrapper(
+    navController: NavHostController,
+    modifier: Modifier,
+) {
+
     NavHost(
         navController = navController,
-        startDestination = Permissions,
+        startDestination = Splash,
         modifier = modifier
     ) {
-        composable<Permissions> {
-            PermissionsScreen(
-                onContinue = {
-                    navController.navigate(Home) { // Asume que HomeRoute es tu pantalla principal
-                        popUpTo(Permissions) { inclusive = true }
-                        launchSingleTop = true
-                    }
+        composable<Splash> {
+            SplashScreen {
+                navController.navigate(Home) {
+                    popUpTo(Splash) { inclusive = true }
+                    launchSingleTop = true
                 }
-            )
+            }
         }
-        composable<Home> { HomeScreen() }
+        composable<Home> { HomeScreen(navController) }
         composable<AllSongs> { AllSongsScreen() }
         composable<Artists> { ArtistsScreen() }
         composable<PlayList> { PlaylistsScreen() }

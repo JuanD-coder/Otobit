@@ -17,7 +17,7 @@ object AllSongs: RouteDestination
 object PlayList: RouteDestination
 
 @Serializable
-object Permissions: RouteDestination
+object Splash: RouteDestination
 
 @Serializable
 object PlayerNow
