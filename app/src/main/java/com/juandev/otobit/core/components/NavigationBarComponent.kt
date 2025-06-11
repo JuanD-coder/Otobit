@@ -6,6 +6,8 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import com.juandev.otobit.core.navigation.NavItemList
 import com.juandev.otobit.core.navigation.RouteDestination
 import com.juandev.otobit.domain.model.NavItem
 
@@ -25,5 +27,24 @@ fun NavigationBarComponent(
                 label = { Text(text = item.label) }
             )
         }
+    }
+}
+
+@Composable
+fun NavigationBar(navController: NavHostController, currentNavItemRoute: RouteDestination?) {
+    if (NavItemList.navItemList.isNotEmpty()) {
+        NavigationBarComponent(
+            navItemList = NavItemList.navItemList,
+            currentRoute = currentNavItemRoute,
+            onItemSelected = { route ->
+                navController.navigate(route) {
+                    popUpTo(navController.graph.startDestinationId) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }
+        )
     }
 }

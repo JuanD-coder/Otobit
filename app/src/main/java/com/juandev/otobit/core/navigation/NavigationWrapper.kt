@@ -30,7 +30,7 @@ fun NavigationWrapper(
                 }
             }
         }
-        composable<Home> { HomeScreen(navController) }
+        composable<Home> { HomeScreen() }
         composable<AllSongs> { AllSongsScreen() }
         composable<Artists> { ArtistsScreen() }
         composable<PlayList> { PlaylistsScreen() }

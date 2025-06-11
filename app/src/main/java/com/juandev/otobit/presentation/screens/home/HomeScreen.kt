@@ -19,20 +19,10 @@ import com.juandev.otobit.core.navigation.NavItemList
 import com.juandev.otobit.core.navigation.RouteDestination
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRouteString = navBackStackEntry?.destination?.route
-
-    val currentNavItemRoute: RouteDestination? = NavItemList.navItemList.find { routeObject ->
-        routeObject.route::class.qualifiedName == currentRouteString
-                || routeObject.toString() == currentRouteString
-    }?.route
+fun HomeScreen() {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        bottomBar = {
-            NavigationBar(navController, currentNavItemRoute)
-        }
     ) { padding ->
         Box(modifier = Modifier.padding(padding).fillMaxSize()) {
             Column {
@@ -60,23 +50,4 @@ fun AddedMusic() {
 @Composable
 fun SuggestMusic() {
     TODO("Not yet implemented")
-}
-
-@Composable
-fun NavigationBar(navController: NavHostController, currentNavItemRoute: RouteDestination?) {
-    if (NavItemList.navItemList.isNotEmpty()) {
-        NavigationBarComponent(
-            navItemList = NavItemList.navItemList,
-            currentRoute = currentNavItemRoute,
-            onItemSelected = { route ->
-                navController.navigate(route) {
-                    popUpTo(navController.graph.startDestinationId) {
-                        saveState = true
-                    }
-                    launchSingleTop = true
-                    restoreState = true
-                }
-            }
-        )
-    }
 }
