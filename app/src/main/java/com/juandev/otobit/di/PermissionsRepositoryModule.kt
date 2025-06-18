@@ -1,6 +1,6 @@
 package com.juandev.otobit.di
 
-import com.juandev.otobit.data.local.repository.AppSettingsRepositoryImpl
+import com.juandev.otobit.data.repository.AppSettingsRepositoryImpl
 import com.juandev.otobit.domain.repository.AppSettingsRepository
 import dagger.Binds
 import dagger.Module

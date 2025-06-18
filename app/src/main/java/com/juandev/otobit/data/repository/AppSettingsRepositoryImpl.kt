@@ -1,4 +1,4 @@
-package com.juandev.otobit.data.local.repository
+package com.juandev.otobit.data.repository
 
 import com.juandev.otobit.data.local.datastore.AppSettingsLocalDataSource
 import com.juandev.otobit.domain.model.PermissionsPreferenceState
