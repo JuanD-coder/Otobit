@@ -7,7 +7,7 @@ import jakarta.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class AudioRepositoryImpl @Inject constructor(
+class SongRepositoryImpl @Inject constructor(
     private val contentResolverHelper: ContentResolverHelper
 ): SongRepository {
 

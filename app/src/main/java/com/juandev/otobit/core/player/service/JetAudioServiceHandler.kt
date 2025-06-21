@@ -7,6 +7,7 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +25,10 @@ class JetAudioServiceHandler @Inject constructor(
     val audioState: StateFlow<JetAudioState> = _audioState.asStateFlow()
 
     private var job: Job? = null
-    private val serviceScope = CoroutineScope(Dispatchers.Main)
+
+    init {
+        exoPlayer.addListener(this)
+    }
 
     fun addMediaItem(mediaItem: MediaItem) {
         exoPlayer.setMediaItem(mediaItem)
@@ -86,15 +90,10 @@ class JetAudioServiceHandler @Inject constructor(
 
     @OptIn(UnstableApi::class)
     override fun onIsPlayingChanged(isPlaying: Boolean) {
-        // Combinar los dos estados en uno si es posible, o emitirlos de forma que la UI pueda manejarlos adecuadamente.
-        // Por ejemplo, puedes tener un estado que contenga tanto `isPlaying` como `currentMediaItemIndex`.
-        _audioState.value = JetAudioState.PlayingState(
-            isPlaying = isPlaying,
-            currentMediaItemIndex = exoPlayer.currentMediaItemIndex
-        )
-
+        _audioState.value = JetAudioState.Playing(isPlaying = isPlaying)
+        _audioState.value = JetAudioState.CurrentPlaying(exoPlayer.currentMediaItemIndex)
         if (isPlaying) {
-            job = serviceScope.launch { // Usar el scope del servicio
+            GlobalScope.launch(Dispatchers.Main) {
                 startProgressUpdate()
             }
         } else {

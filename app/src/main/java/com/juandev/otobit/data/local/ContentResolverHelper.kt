@@ -9,7 +9,9 @@ import androidx.annotation.WorkerThread
 import com.juandev.otobit.domain.model.SongData
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ContentResolverHelper @Inject
 constructor(@ApplicationContext val context: Context) {
     private var mCursor: Cursor? = null
@@ -48,7 +50,7 @@ constructor(@ApplicationContext val context: Context) {
 
     // Función privada que realiza la consulta real al ContentResolver y procesa los resultados.
     private fun getCursorData(): MutableList<SongData> {
-        val audioList = mutableListOf<SongData>()
+        val songList = mutableListOf<SongData>()
 
         mCursor = context.contentResolver.query(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -89,7 +91,7 @@ constructor(@ApplicationContext val context: Context) {
                             id
                         )
 
-                        audioList += SongData(
+                        songList += SongData(
                             uri, title, displayName, artist, data, duration, id
                         )
 
@@ -99,7 +101,7 @@ constructor(@ApplicationContext val context: Context) {
             }
         }
 
-        return audioList
+        return songList
     }
 
 

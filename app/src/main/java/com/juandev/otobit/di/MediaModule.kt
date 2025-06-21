@@ -10,6 +10,12 @@ import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.session.MediaSession
 import com.juandev.otobit.core.player.notification.JetAudioNotificationManager
 import com.juandev.otobit.core.player.service.JetAudioServiceHandler
+import com.juandev.otobit.data.local.ContentResolverHelper
+import com.juandev.otobit.data.repository.AppSettingsRepositoryImpl
+import com.juandev.otobit.data.repository.SongRepositoryImpl
+import com.juandev.otobit.domain.repository.AppSettingsRepository
+import com.juandev.otobit.domain.repository.SongRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

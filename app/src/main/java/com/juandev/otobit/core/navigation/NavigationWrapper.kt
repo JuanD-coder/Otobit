@@ -15,6 +15,7 @@ import com.juandev.otobit.presentation.screens.splash.SplashScreen
 fun NavigationWrapper(
     navController: NavHostController,
     modifier: Modifier,
+    isServiceRunning: Unit
 ) {
 
     NavHost(
@@ -31,7 +32,9 @@ fun NavigationWrapper(
             }
         }
         composable<Home> { HomeScreen() }
-        //composable<AllSongs> { AllSongsScreen() }
+        composable<AllSongs> {
+            AllSongsScreen(isServiceRunning = isServiceRunning)
+        }
         composable<Artists> { ArtistsScreen() }
         composable<PlayList> { PlaylistsScreen() }
     }

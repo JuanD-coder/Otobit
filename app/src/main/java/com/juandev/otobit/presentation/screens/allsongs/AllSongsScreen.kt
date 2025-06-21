@@ -24,6 +24,7 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +36,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.juandev.otobit.R
 import com.juandev.otobit.domain.model.SongData
 import com.juandev.otobit.presentation.ui.theme.OtobitTheme
@@ -44,10 +47,10 @@ import kotlin.math.floor
 @Composable
 fun HomeScreenPrev() {
     OtobitTheme {
-        AllSongsScreen(
+        AllSongsScreenContent(
             progress = 50f,
             onProgress = {},
-            isSongPlaying = true,
+            isSongPlaying = false,
             songList = listOf(
                 SongData("".toUri(), "Title One", "Said", "Title One", "", 0, 0L),
                 SongData("".toUri(), "Title two", "Unknown", "Title two", "", 0, 0L),
@@ -68,9 +71,36 @@ fun HomeScreenPrev() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AllSongsScreen(
+    viewModel: AllSongsViewModel = hiltViewModel(),
+    isServiceRunning: Unit
+) {
+
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    AllSongsScreenContent(
+        progress = uiState.progress,
+        onProgress = { viewModel.onUIEvents(UIEvents.SeekTo(it)) },
+        isSongPlaying = uiState.isPlaying,
+        currentPlayingSong = uiState.currentSelectedSong,
+        songList = uiState.songsList,
+        onStart = {
+            viewModel.onUIEvents(UIEvents.PlayPause)
+        },
+        onItemClick = {
+            viewModel.onUIEvents(UIEvents.SelectedAudioChange(it))
+            isServiceRunning
+        },
+        onNext = {
+            viewModel.onUIEvents(UIEvents.SeekToNext)
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AllSongsScreenContent(
     progress: Float,
     onProgress: (Float) -> Unit,
     isSongPlaying: Boolean,
@@ -112,11 +142,6 @@ fun AllSongsScreen(
         }
 
     }
-}
-
-@Composable
-fun AllSongs() {
-    Text(text = "Songs Screen")
 }
 
 @Composable
@@ -249,7 +274,7 @@ fun PlayerIconItem(
     modifier: Modifier = Modifier,
     icon: Painter,
     borderStroke: BorderStroke? = null,
-    backgroundColor: Color = MaterialTheme.colorScheme.onSurface,
+    backgroundColor: Color = Color.Transparent,
     color: Color = MaterialTheme.colorScheme.onSurface,
     onClick: () -> Unit,
 ) {
@@ -265,7 +290,7 @@ fun PlayerIconItem(
         color = backgroundColor
     ) {
         Box(
-            modifier = modifier.padding(4.dp),
+            modifier = Modifier.padding(4.dp),
             contentAlignment = Alignment.Center,
         ) {
             Icon(
