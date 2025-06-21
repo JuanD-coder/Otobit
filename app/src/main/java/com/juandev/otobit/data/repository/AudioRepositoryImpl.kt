@@ -1,17 +1,17 @@
 package com.juandev.otobit.data.repository
 
 import com.juandev.otobit.data.local.ContentResolverHelper
-import com.juandev.otobit.domain.model.Audio
-import com.juandev.otobit.domain.repository.AudioRepository
+import com.juandev.otobit.domain.model.SongData
+import com.juandev.otobit.domain.repository.SongRepository
 import jakarta.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class AudioRepositoryImpl @Inject constructor(
     private val contentResolverHelper: ContentResolverHelper
-): AudioRepository {
+): SongRepository {
 
-    override suspend fun getAudioData(): List<Audio> = withContext(Dispatchers.IO) {
+    override suspend fun getSongData(): List<SongData> = withContext(Dispatchers.IO) {
         contentResolverHelper.getAudioData()
     }
 

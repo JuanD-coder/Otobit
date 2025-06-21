@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.provider.MediaStore
 import android.util.Log
 import androidx.annotation.WorkerThread
-import com.juandev.otobit.domain.model.Audio
+import com.juandev.otobit.domain.model.SongData
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -42,13 +42,13 @@ constructor(@ApplicationContext val context: Context) {
      * @return Una lista de objetos `Audio` que representan los archivos de música encontrados.
      */
     @WorkerThread
-    fun getAudioData(): List<Audio> {
+    fun getAudioData(): List<SongData> {
         return getCursorData()
     }
 
     // Función privada que realiza la consulta real al ContentResolver y procesa los resultados.
-    private fun getCursorData(): MutableList<Audio> {
-        val audioList = mutableListOf<Audio>()
+    private fun getCursorData(): MutableList<SongData> {
+        val audioList = mutableListOf<SongData>()
 
         mCursor = context.contentResolver.query(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -89,7 +89,7 @@ constructor(@ApplicationContext val context: Context) {
                             id
                         )
 
-                        audioList += Audio(
+                        audioList += SongData(
                             uri, title, displayName, artist, data, duration, id
                         )
 

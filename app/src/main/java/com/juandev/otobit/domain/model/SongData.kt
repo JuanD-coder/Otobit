@@ -2,7 +2,7 @@ package com.juandev.otobit.domain.model
 
 import android.net.Uri
 
-data class Audio (
+data class SongData (
     val uri: Uri,
     val title: String,
     val displayName: String,
