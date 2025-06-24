@@ -1,5 +1,4 @@
 # Otobit
----
 
 Un reproductor de música nativa para Android desarrollado con Jetpack Compose.
 
